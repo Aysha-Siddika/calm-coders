@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/back"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Register">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:text="SIGN IN"
+        android:textColor="#000"
+        android:textSize="21dp"
+        android:id="@+id/signin"
+        android:textStyle="bold"
+        android:background="@drawable/shape1"
+        android:layout_above="@+id/signup"
+        android:layout_centerHorizontal="true"
+        android:onClick="onsignin"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:textColor="#000"
+        android:layout_marginTop="15dp"
+        android:text="SIGN UP"
+        android:textSize="21dp"
+        android:textStyle="bold"
+        android:background="@drawable/shape1"
+        android:id="@+id/signup"
+        android:layout_marginBottom="60dp"
+        android:onClick="onsignup"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:background="@drawable/imgs"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/signup"
+        android:layout_marginEnd="42dp" />
+
+
+</RelativeLayout>

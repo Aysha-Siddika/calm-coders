@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Intrepido</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_sigin">Sigin</string>
+    <string name="title_activity_signin">Signin</string>
+    <string name="title_activity_signup">Signup</string>
+    <string name="title_activity_start">Start</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_emergensy">Emergensy</string>
+    <string name="title_activity_emergency">Emergency</string>
+</resources>
