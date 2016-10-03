@@ -46,7 +46,8 @@ public class BackendProcess1 extends AsyncTask<String ,String,String> {
                 try {
                         REGISTER_URL = new URL("http://ahh.esy.es/Intrepido/signin.php");
 
-                } catch (MalformedURLException e) {
+                }
+                catch (MalformedURLException e) {
                         e.printStackTrace();
                         return "No internet";
                 }
@@ -66,17 +67,11 @@ public class BackendProcess1 extends AsyncTask<String ,String,String> {
                         write.flush();
                         write.close();
                         out.close();
-                        http.connect();
-                } catch (IOException e)
 
-                {
-                        e.printStackTrace();
-                        return "execption";
-                }
 
-                try {
                         int response_code = http.getResponseCode();
-                        if (response_code == HttpURLConnection.HTTP_OK) {
+                        if (response_code == HttpURLConnection.HTTP_OK)
+                        {
                                 InputStream in = http.getInputStream();
                                 BufferedReader read = new BufferedReader(new InputStreamReader(in, "iso-8859-1"));
                                 StringBuilder result = new StringBuilder();
@@ -88,16 +83,17 @@ public class BackendProcess1 extends AsyncTask<String ,String,String> {
 
                                result1= result.toString();
                         }
-
+                        return result1;
                 }
                 catch (IOException e)
                 {
                         e.printStackTrace();
-                } finally
+                }
+                finally
                 {
                         http.disconnect();
                 }
-                return result1;
+                return null;
 
 
         }
@@ -117,9 +113,16 @@ protected void onPreExecute() {
 protected void onPostExecute(String result1)
 {
         super.onPostExecute(result1);
-        alertDialog.setMessage(result1);
-        alertDialog.show();
+        alertDialog.dismiss();
+        String s = result1.trim();
+        if(s.equalsIgnoreCase("login successfull")){
+                Intent intent = new Intent("com.example.harini.intrepido.Start");
+                context.startActivity(intent);
+        }else {
+                Toast.makeText(context.getApplicationContext(), "Invalid User Name or Password", Toast.LENGTH_LONG).show();
+        }
 }
+
 @Override
 protected void onProgressUpdate( String... values) {
         super.onProgressUpdate(values);

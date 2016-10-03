@@ -35,8 +35,7 @@ public class Signin extends AppCompatActivity implements View.OnClickListener {
         {
             LoginUser();
 
-            Intent intent = new Intent("com.example.harini.intrepido.Start");
-            startActivity(intent);
+
 
         }
 
