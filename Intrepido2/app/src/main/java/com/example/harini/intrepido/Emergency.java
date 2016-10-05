@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 public class Emergency extends AppCompatActivity {
 
         ImageButton helpbtn,smugbtn;
+
 
 
         AppLocationService appLocationService;
@@ -52,9 +54,7 @@ public class Emergency extends AppCompatActivity {
                         String result = "Latitude: " + latitude +
                                 " Longitude: " + longitude;
 
-                    }
-                    else
-                    {
+                    } else {
                         showSettingsAlert();
                     }
 
@@ -79,9 +79,7 @@ public class Emergency extends AppCompatActivity {
                         String result = "Latitude: " + latitude +
                                 " Longitude: " + longitude;
 
-                    }
-                    else
-                    {
+                    } else {
                         showSettingsAlert();
                     }
 
@@ -90,10 +88,8 @@ public class Emergency extends AppCompatActivity {
 
         }
 
-
-
-
-        public void showSettingsAlert() {
+    public void showSettingsAlert()
+    {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(
                     Emergency.this);
             alertDialog.setTitle("SETTINGS");
@@ -115,7 +111,9 @@ public class Emergency extends AppCompatActivity {
             alertDialog.show();
         }
 
-        private class GeocoderHandler extends Handler {
+
+
+    public class GeocoderHandler extends Handler {
             @Override
             public void handleMessage(Message message) {
                 String locationAddress;
@@ -130,18 +128,18 @@ public class Emergency extends AppCompatActivity {
                 sendSMSMessage(locationAddress);
             }
         }
-        protected void sendSMSMessage(String ret) {
+        public void sendSMSMessage(String ret) {
 
             // fetch the Sms Manager
 
-
-            try {
+            try
+            {
                 SmsManager sms = SmsManager.getDefault();
-
                 // the message
                 String message = "I am in danger pls help me this is my location" + ret;
 
 // the phone numbers we want to send to
+
                 String numbers[] = {"9487875668","9498085083"};
 
                 for (String number : numbers)
@@ -196,6 +194,50 @@ public class Emergency extends AppCompatActivity {
         }
     }
 
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
 
+
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                Toast.makeText(this, "Volume Up pressed", Toast.LENGTH_SHORT).show();
+                Location location = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+
+                    LocationAddress locationAddress = new LocationAddress();
+                    locationAddress.getAddressFromLocation(latitude, longitude,
+                            getApplicationContext(), new GeocoderHandler());
+                    String result = "Latitude: " + latitude +
+                            " Longitude: " + longitude;
+                } else
+                {
+                    showSettingsAlert();
+                }
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                Toast.makeText(this,"Volume Down pressed", Toast.LENGTH_SHORT).show();
+
+                location = appLocationService
+                        .getLocation(LocationManager.GPS_PROVIDER);
+
+                if (location != null) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+
+                    LocationAddress locationAddress = new LocationAddress();
+                    locationAddress.getAddressFromLocation(latitude, longitude,
+                            getApplicationContext(),new GeocoderHandler());
+                    String result = "Latitude: " + latitude +
+                            " Longitude: " + longitude;
+                } else
+                {
+                   showSettingsAlert();
+                }
+
+        }
+        return super.onKeyDown(keyCode, event);
+
+
+    }
 
 }

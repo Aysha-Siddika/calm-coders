@@ -134,7 +134,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         originMarkers = new ArrayList<>();
         destinationMarkers = new ArrayList<>();
 
-        for (Route route : routes) {
+        for (Route route : routes)
+        {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(route.startLocation, 16));
             ((TextView) findViewById(R.id.tvDuration)).setText(route.duration.text);
             ((TextView) findViewById(R.id.tvDistance)).setText(route.distance.text);
